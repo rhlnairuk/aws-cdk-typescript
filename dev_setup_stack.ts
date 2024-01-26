@@ -55,9 +55,9 @@ export class DevStack extends Stack {
     // Define the criteria for the AMI
     const amiFilters = {
       filters: {
-        'name': 'amzn2-ami-hvm-*-x86_64-gp2', // Example pattern
+        'name': process.env.CDK_IMAGE_REGEX || 'amzn2-ami-hvm-*-x86_64-gp2', // Example pattern
       },
-      owners: ['amazon'], // Specify the owner account ID
+      owners: [process.env.CDK_AMI_ACCOUNT] || ['amazon'], // Specify the owner account ID
     };
 
     const latestAmi = ec2.MachineImage.lookup(amiFilters);
